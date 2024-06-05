@@ -1,0 +1,308 @@
+{
+	"info": {
+		"_postman_id": "9c83a5a5-e3b4-4804-81c4-795fd9ea57b7",
+		"name": "Accuknox Social App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27270229"
+	},
+	"item": [
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"atharvak@gmail.com\",\r\n    \"name\": \"Atharva Kulkarni\",\r\n    \"password\": \"Welcome@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/signup/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"signup",
+						""
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": null,
+							"disabled": true
+						}
+					]
+				},
+				"description": "This endpoint creates new users in the application to sign up with their email, name, and password.\n\nRequires: _**name**_, _**email**_ and _**password**_."
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"amkulkarni1999@gmail.com\",\r\n    \"password\": \"Welcome@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/login/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login",
+						""
+					]
+				},
+				"description": "This endpoint allows users to login with email and password to generate a JWT token.\n\nRequires: _**email**_ and _**password**_"
+			},
+			"response": []
+		},
+		{
+			"name": "Search Users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE3NTMwNjkwLCJpYXQiOjE3MTc1MzAzOTAsImp0aSI6ImE5MjI2M2YxZTI2MTQxZDk4YmE5NjAyY2E5ODU0OGVhIiwidXNlcl9pZCI6MX0.u5D0AVReSAjCyxbc_lxPsYRMfpvNL5yA-fOwgjoAZ_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/search/?find=katharva",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "find",
+							"value": "katharva",
+							"description": "Username/Email of the user to add as a friend. If the value inclues \"@\" it will search with email else it will search in the name of the user containing the value."
+						}
+					]
+				},
+				"description": "This endpoint searches for users by email or name. If the search keyword matches an email exactly, it returns the user associated with that email. If the keyword is part of a name, it returns a list of matching users."
+			},
+			"response": []
+		},
+		{
+			"name": "Send friend request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE3NTM0Nzg5LCJpYXQiOjE3MTc1MzQ0ODksImp0aSI6IjM5ZDdkNWZkZjYxZDRkNDJhNDhjZDIyMmYzZDI1YjQwIiwidXNlcl9pZCI6Mn0.j6elBCzA7eu1UGyYCk-m-3xWHgBb2oYv_O-W_YrKyCE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"to_user_id\": \"amkulkarni1999@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/friend-request/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"friend-request",
+						""
+					]
+				},
+				"description": "This endpoint allows a user to send a friend request to the username of another user.\n\nRequires: _**email**_ and _**token**_."
+			},
+			"response": []
+		},
+		{
+			"name": "Accept/Reject Friend Request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE3NTM2NDA4LCJpYXQiOjE3MTc1MzYxMDgsImp0aSI6ImJlYTgyMWY4NTEzYzQ1YTRiODZmZDA4ODJjYzhkYWU3IiwidXNlcl9pZCI6MX0.BYTg1Pzi1ybT6pwCi9NoIfy_QCY0cyQfHPuRAaEf9tY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"request_id\": \"1\",\r\n    \"action\": \"accept\" or \"reject\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/friend-request/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"friend-request",
+						""
+					]
+				},
+				"description": "This endpoint allows a user to accept or reject a friend request.\n\nRequires: _**Token**_"
+			},
+			"response": []
+		},
+		{
+			"name": "List Pending Requests",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE3NTM0OTg4LCJpYXQiOjE3MTc1MzQ2ODgsImp0aSI6IjllYzFhZGQ2MDU5NTQ0NTFhM2I1ZjBhODY0MjMyYWUyIiwidXNlcl9pZCI6MX0.GS8JbWE2twmu7V36TLrxMoXca4dPos0qCgBWpWd6zLE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/pending-requests/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"pending-requests",
+						""
+					]
+				},
+				"description": "This endpoint lists all pending friend requests received by the user.\n\nRequires: _**Token**_"
+			},
+			"response": []
+		},
+		{
+			"name": "List Friends",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE3NTM2NTgwLCJpYXQiOjE3MTc1MzYyODAsImp0aSI6Ijc5Yjk0NGNlYmE2YzRmZTNhNDFiODNiZTI0NTYxNzdiIiwidXNlcl9pZCI6Mn0.q--dIn0fBfpu6dEdqMLRlZIGRG2W8Q1Zr1RJTO4DTIE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/friends/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"friends",
+						""
+					]
+				},
+				"description": "This endpoint lists all users who have accepted the friend request.\n\nRequiers: _**Token**_"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
